@@ -11,7 +11,7 @@ The authors present a straightforward method for pruning layers from popular pre
 
 The codebase is divided into two main parts:
 
-### compute_block_similarity
+### First compute the block/layer similarity given a dataset
 
 Navigate to the `compute_block_similarity` directory to run the layer similarity computation script.
 
