@@ -31,9 +31,16 @@ python layer_similarity.py --model_path "mistralai/Mistral-7B-Instruct-v0.2" \
 
 3. Execute the script to get the most optimum layer/block range to prune.
 
-### slice_with_mergekit
+### Create the new model with the [Mergekit](https://github.com/arcee-ai/mergekit)
 
 After identifying the layers to prune, you can proceed to the `slice_with_mergekit` directory. Here, you can leverage the MergeKit library to prune the identified layers from the model effectively.
+
+
+## Observations and Insights
+
+Our findings corroborate the theory presented in the paper `The Unreasonable Ineffectiveness of the Deeper Layers`—that some portions of deeper layers in LLMs like `mistralai/Mistral-7B-Instruct-v0.2` can be pruned with minimal performance degradation. Specifically, we observed a pattern of high redundancy in deeper layers, aligning with the hypothesis that not all layers contribute equally to the model's performance. This redundancy indicates potential for computational efficiency improvements without sacrificing the quality of outcomes. Following this strategy, the pruned model can be found in the [arcee-ai/Mistral-7B-Instruct-v0.2-sliced-24-layer](https://huggingface.co/arcee-ai/Mistral-7B-Instruct-v0.2-sliced-24-layer), and it can generate coherent text, demonstrating the practical applicability of our pruning approach.
+
+![Minimum Distance Highlight](min_distance_highlight.png "Layer 21-29 with Minimum Average Distance")
 
 ## Use Cases
 
@@ -52,8 +59,3 @@ For more details on evolutionary model merging, visit [Sakana AI's DFS Merging O
 
 
 
-### Observations and Insights
-
-Our findings corroborate the theory presented in the paper `The Unreasonable Ineffectiveness of the Deeper Layers`—that some portions of deeper layers in LLMs like `mistralai/Mistral-7B-Instruct-v0.2` can be pruned with minimal performance degradation. Specifically, we observed a pattern of high redundancy in deeper layers, aligning with the hypothesis that not all layers contribute equally to the model's performance. This redundancy indicates potential for computational efficiency improvements without sacrificing the quality of outcomes. Following this strategy, the pruned model can be found in the [arcee-ai/Mistral-7B-Instruct-v0.2-sliced-24-layer](https://huggingface.co/arcee-ai/Mistral-7B-Instruct-v0.2-sliced-24-layer), and it can generate coherent text, demonstrating the practical applicability of our pruning approach.
-
-![Minimum Distance Highlight](min_distance_highlight.png "Layer 21-29 with Minimum Average Distance")
