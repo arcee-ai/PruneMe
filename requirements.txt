@@ -1,0 +1,5 @@
+transformers
+datasets
+accelerate
+bitandbytes
+torch
