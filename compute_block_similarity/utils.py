@@ -1,7 +1,8 @@
 import torch
 from typing import List
+
 def angular_distance(x_l, x_l_plus_n) -> torch.Tensor:
-    """Compute the angular distance between layer outputs."""
+    """Compute the angular distance between layer output tokens."""
     x_l_norm = x_l / torch.norm(x_l, dim=-1, keepdim=True)
     x_l_plus_n_norm = x_l_plus_n / torch.norm(x_l_plus_n, dim=-1, keepdim=True)
     cosine_similarity = (x_l_norm * x_l_plus_n_norm).sum(-1)

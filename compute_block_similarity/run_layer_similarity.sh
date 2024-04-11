@@ -6,8 +6,8 @@
 python layer_similarity.py --model_path "mistralai/Mistral-7B-Instruct-v0.2" \
                       --dataset "arcee-ai/sec-data-mini" \
                       --dataset_column "text" \
-                      --batch_size 16 \
-                      --max_length 128 \
-                      --layer_to_skip 4 \
-                      --dataset_size 100 \
+                      --batch_size 8 \
+                      --max_length 1024 \
+                      --layer_to_skip 12 \
+                      --dataset_size 4000 \
                       --dataset_subset "train" 

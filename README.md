@@ -19,15 +19,15 @@ Navigate to the `compute_block_similarity` directory to run the layer similarity
 2. Replace the placeholder arguments with your model and dataset information:
 
 ```bash
-python layer_similarity.py \
-              --model_path "mistralai/Mistral-7B-Instruct-v0.2" \
-              --dataset "arcee-ai/sec-data-mini" \
-              --dataset_column "text" \
-              --batch_size 16 \
-              --max_length 128 \
-              --layer_to_skip 4 \
-              --dataset_size 100 \
-              --dataset_subset "train"
+python layer_similarity.py 
+                      --model_path "mistralai/Mistral-7B-Instruct-v0.2" \
+                      --dataset "arcee-ai/sec-data-mini" \
+                      --dataset_column "text" \
+                      --batch_size 8 \
+                      --max_length 1024 \
+                      --layer_to_skip 12 \
+                      --dataset_size 4000 \
+                      --dataset_subset "train" 
 ```
 
 3. Execute the script to get the most optimum layer/block range to prune.

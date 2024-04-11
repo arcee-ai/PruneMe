@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 import datasets
 
-from compute_block_similarity.utils import get_last_non_padded_tokens, compute_block_distances
+from utils import get_last_non_padded_tokens, compute_block_distances
 from typing import Optional
 
 logging.basicConfig(level=logging.INFO)
@@ -24,6 +24,7 @@ def main(model_path: str, dataset: str, dataset_column: str, batch_size: int, ma
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
+    # if resource is a problem
     quantization_config = BitsAndBytesConfig(load_in_4bit=True,
                                             bnb_4bit_use_double_quant=True,
                                             bnb_4bit_quant_type="nf4",
@@ -75,18 +76,28 @@ def main(model_path: str, dataset: str, dataset_column: str, batch_size: int, ma
     # Calculate average distances for each block
     average_distances = [np.mean(block_distances) for block_distances in all_distances]
 
-    # Write the average distances to a CSV file
+    # Write the average distances to a CSV file and compute the minimum average distance
+    min_distance = float('inf')  # Initialize with infinity
+    min_distance_layer = 0  # Initialize with an impossible value
+
     with open('layer_distances.csv', 'w', newline='') as csvfile:
         fieldnames = ['block_start', 'block_end', 'average_distance']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for i, avg_dist in enumerate(average_distances):
+            # Write each row to the CSV
             writer.writerow({
                 'block_start': i + 1,  # layer indices are 1-based in the paper
                 'block_end': i + 1 + layer_to_skip,
                 'average_distance': avg_dist
             })
+            
+            if avg_dist < min_distance:
+                min_distance = avg_dist
+                min_distance_layer = i + 1  
 
+    # Log the layer with the minimum average distance
+    logging.info(f"Layer {min_distance_layer} to {min_distance_layer + layer_to_skip} has the minimum average distance of {min_distance}. Consider examining this layer more closely for potential optimization or removal.")
     logging.info("Layer distances written to layer_distances.csv")
 
 
