@@ -19,7 +19,8 @@ Navigate to the `compute_block_similarity` directory to run the layer similarity
 2. Replace the placeholder arguments with your model and dataset information:
 
 ```bash
-   python layer_similarity.py --model_path "mistralai/Mistral-7B-Instruct-v0.2" \
+python layer_similarity.py \
+              --model_path "mistralai/Mistral-7B-Instruct-v0.2" \
               --dataset "arcee-ai/sec-data-mini" \
               --dataset_column "text" \
               --batch_size 16 \
