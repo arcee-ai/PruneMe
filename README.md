@@ -1,7 +1,7 @@
 
 # Layer Pruning of Large Language Models
 
-This repository hosts the implementation of a layer pruning strategy for Large Language Models (LLMs) based on the insights from the paper "The Unreasonable Ineffectiveness of the Deeper Layers" by Andrey Gromov et al. The paper empirically demonstrates that LLMs can have a substantial number of their layers removed with minimal performance degradation, especially on question-answering benchmarks.
+This repository hosts the implementation of a layer pruning strategy for Large Language Models (LLMs) based on the insights from the paper "[The Unreasonable Ineffectiveness of the Deeper Layers](https://arxiv.org/abs/2403.17887)" by Andrey Gromov et al. The paper empirically demonstrates that LLMs can have a substantial number of their layers removed with minimal performance degradation, especially on question-answering benchmarks.
 
 ## Summary of the Paper
 
@@ -29,7 +29,7 @@ Navigate to the `compute_block_similarity` directory to run the layer similarity
               --dataset_subset "train"
 ```
 
-3. Execute the script to obtain the most optimum layer/block range to prune.
+3. Execute the script to get the most optimum layer/block range to prune.
 
 ### slice_with_mergekit
 
