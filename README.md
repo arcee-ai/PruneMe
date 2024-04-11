@@ -24,7 +24,7 @@ python layer_similarity.py --model_path "mistralai/Mistral-7B-Instruct-v0.2" \
                       --dataset_column "text" \
                       --batch_size 8 \
                       --max_length 1024 \
-                      --layer_to_skip 8 \
+                      --layers_to_skip 8 \
                       --dataset_size 4000 \
                       --dataset_subset "train" 
 ```

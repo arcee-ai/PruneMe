@@ -8,12 +8,12 @@ def angular_distance(x_l, x_l_plus_n) -> torch.Tensor:
     cosine_similarity = (x_l_norm * x_l_plus_n_norm).sum(-1)
     return torch.acos(cosine_similarity.clamp(min=-1, max=1)) / torch.pi
 
-def compute_block_distances(hidden_states: List[torch.Tensor], layer_to_skip: int) -> List[float]:
+def compute_block_distances(hidden_states: List[torch.Tensor], layers_to_skip: int) -> List[float]:
     """Compute and return angular distances for each block of layers."""
     distances = []
     num_layers = len(hidden_states)
-    for l in range(num_layers - layer_to_skip):
-        block_distance = angular_distance(hidden_states[l], hidden_states[l + layer_to_skip]).mean().item()
+    for l in range(num_layers - layers_to_skip):
+        block_distance = angular_distance(hidden_states[l], hidden_states[l + layers_to_skip]).mean().item()
         distances.append(block_distance)
     return distances
 
