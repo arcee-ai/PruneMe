@@ -19,13 +19,12 @@ Navigate to the `compute_block_similarity` directory to run the layer similarity
 2. Replace the placeholder arguments with your model and dataset information:
 
 ```bash
-python layer_similarity.py 
-                      --model_path "mistralai/Mistral-7B-Instruct-v0.2" \
+python layer_similarity.py --model_path "mistralai/Mistral-7B-Instruct-v0.2" \
                       --dataset "arcee-ai/sec-data-mini" \
                       --dataset_column "text" \
                       --batch_size 8 \
                       --max_length 1024 \
-                      --layer_to_skip 12 \
+                      --layer_to_skip 8 \
                       --dataset_size 4000 \
                       --dataset_subset "train" 
 ```
@@ -50,3 +49,11 @@ The layer pruning strategy detailed in the paper and implemented in this codebas
 By pruning larger models and continuing pre-training with domain-specific datasets, this strategy could revolutionize the way we merge smaller domain-adapted LLMs into larger ones through Data Flow Space (DFS) Merging, facilitating gradient-free learning.
 
 For more details on evolutionary model merging, visit [Sakana AI's DFS Merging Overview](https://sakana.ai/evolutionary-model-merge/).
+
+
+
+### Observations and Insights
+
+Our findings corroborate the theory presented in the paper `The Unreasonable Ineffectiveness of the Deeper Layers`—that some portions of deeper layers in LLMs like `mistralai/Mistral-7B-Instruct-v0.2` can be pruned with minimal performance degradation. Specifically, we observed a pattern of high redundancy in deeper layers, aligning with the hypothesis that not all layers contribute equally to the model's performance. This redundancy indicates potential for computational efficiency improvements without sacrificing the quality of outcomes. Following this strategy, the pruned model can be found in the [arcee-ai/Mistral-7B-Instruct-v0.2-sliced-24-layer](https://huggingface.co/arcee-ai/Mistral-7B-Instruct-v0.2-sliced-24-layer), and it can generate coherent text, demonstrating the practical applicability of our pruning approach.
+
+![Minimum Distance Highlight](min_distance_highlight.png "Layer 21-29 with Minimum Average Distance")
