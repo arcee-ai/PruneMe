@@ -53,9 +53,6 @@ The layer pruning strategy detailed in the paper and implemented in this codebas
 
 ## Advanced Use Cases
 
-By pruning larger models and continuing pre-training with domain-specific datasets, this strategy could revolutionize the way we merge smaller domain-adapted LLMs into larger ones through Data Flow Space (DFS) Merging, facilitating gradient-free learning.
-
-For more details on evolutionary model merging, visit [Sakana AI's DFS Merging Overview](https://sakana.ai/evolutionary-model-merge/).
-
+By pruning larger models and continuing pre-training with domain-specific datasets, this strategy could revolutionize the way we merge smaller domain-adapted LLMs into larger ones through Data Flow Space (DFS) Merging, facilitating efficient domain adaptation.
 
 
