@@ -1,5 +1,5 @@
 transformers
 datasets
 accelerate
-bitandbytes
+bitsandbytes
 torch
